@@ -1,26 +1,8 @@
-// Surfingkeys settings, migrated from Vimium (../Vimium options/vimium-options.json).
-//
-// Order matters: `api.map(new, old)` copies whatever `old` is bound to *at that
-// moment*, so keys are copied before their original binding is overridden.
-
 // ---------------------------------------------------------------------------
 // Search engines (Vimium "searchEngines")
 // ---------------------------------------------------------------------------
-// Surfingkeys already ships g (google), d (duckduckgo) and y (youtube) with
-// suggestions, so those are kept. Baidu and Bing are removed; `w` becomes Wikipedia.
 api.removeSearchAlias("b");
-api.removeSearchAlias("w");
 
-api.addSearchAlias(
-  "w",
-  "wikipedia",
-  "https://www.wikipedia.org/w/index.php?title=Special:Search&search=",
-  "s",
-  "https://en.wikipedia.org/w/api.php?action=opensearch&format=json&formatversion=2&namespace=0&limit=40&search=",
-  function (response) {
-    return JSON.parse(response.text)[1];
-  },
-);
 api.addSearchAlias("l", "I'm feeling lucky", "https://www.google.com/search?q={0}&btnI");
 api.addSearchAlias("m", "google maps", "https://www.google.com/maps?q=");
 api.addSearchAlias("ty", "tyda", "http://tyda.se/search/{0}?");
@@ -94,36 +76,34 @@ settings.prevLinkRegex = /\b(previous page|prev|previous|newer|back|föregående
 // Exclusion rules
 // ---------------------------------------------------------------------------
 // Rules with empty passKeys: disable Surfingkeys completely.
-settings.blocklistPattern = new RegExp(
-  [
-    String.raw`^https://codeshare\.io/`, // Vimium passed every printable key here
-    String.raw`^https://wasavi\.appsweets\.net/`,
-    String.raw`^https://repl\.it/`,
-    String.raw`^https://www\.overleaf\.com/project/`,
-    String.raw`^https://docs\.google\.com/spreadsheets`,
-    String.raw`^https://krunker\.io/`,
-    String.raw`^https?://cpp\.sh/`,
-    String.raw`^https?://flat\.io/`,
-    String.raw`^https?://coolwanglu\.github\.io/`,
-    String.raw`^https?://www\.evernote\.com/`,
-    String.raw`^https?://www\.ratatype\.com/`,
-    String.raw`^https?://foony\.com/`,
-    String.raw`^https?://typst\.app/project/`,
-    String.raw`^https?://vim-adventures\.com/`,
-    String.raw`^https?://keyboardyoga\.space/`,
-    String.raw`^https?://www\.typelit\.io/`,
-    String.raw`^https?://www\.boot\.dev/assignments/`,
-    String.raw`^https?://www\.qwerty\.expert/`,
-    String.raw`^https?://www\.keybr\.com/`,
-    String.raw`^https?://monkeytype\.com/`,
-    String.raw`^https?://typ\.ing/`,
-    String.raw`^https?://www\.iq-eq\.io/`,
-    String.raw`^https?://adventure\.charachorder\.io/`,
-    String.raw`^https?://calendar\.proton\.me/`,
-    String.raw`^https?://hl2\.slqnt\.dev/`,
-  ].join("|"),
-  "i",
-);
+const blocklist = [
+  String.raw`^https://codeshare\.io/`, // Vimium passed every printable key here
+  String.raw`^https://wasavi\.appsweets\.net/`,
+  String.raw`^https://repl\.it/`,
+  String.raw`^https://www\.overleaf\.com/project/`,
+  String.raw`^https://docs\.google\.com/spreadsheets`,
+  String.raw`^https://krunker\.io/`,
+  String.raw`^https?://cpp\.sh/`,
+  String.raw`^https?://flat\.io/`,
+  String.raw`^https?://coolwanglu\.github\.io/`,
+  String.raw`^https?://www\.evernote\.com/`,
+  String.raw`^https?://www\.ratatype\.com/`,
+  String.raw`^https?://foony\.com/`,
+  String.raw`^https?://typst\.app/project/`,
+  String.raw`^https?://vim-adventures\.com/`,
+  String.raw`^https?://keyboardyoga\.space/`,
+  String.raw`^https?://www\.typelit\.io/`,
+  String.raw`^https?://www\.boot\.dev/assignments/`,
+  String.raw`^https?://www\.qwerty\.expert/`,
+  String.raw`^https?://www\.keybr\.com/`,
+  String.raw`^https?://monkeytype\.com/`,
+  String.raw`^https?://typ\.ing/`,
+  String.raw`^https?://www\.iq-eq\.io/`,
+  String.raw`^https?://adventure\.charachorder\.io/`,
+  String.raw`^https?://calendar\.proton\.me/`,
+  String.raw`^https?://hl2\.slqnt\.dev/`,
+];
+settings.blocklistPattern = new RegExp(blocklist.join("|"), "i");
 
 // Rules with passKeys: unmap those keys so they reach the page. Unmapping a
 // prefix like `g` also removes every mapping starting with it (gg, gi, ...).
