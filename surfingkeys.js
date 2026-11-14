@@ -141,16 +141,25 @@ for (const [pattern, keys] of passKeys) {
   }
 }
 
-// GitHub: only the `gi` sequence goes to the page (its "go to Issues"). `g`
-// can't be unmapped for that without losing every g-mapping, so `gi` replays
-// the keys to the page while Surfingkeys briefly lets keys through.
+// GitHub: only these `g` sequences go to the page (its "go to" shortcuts). `g`
+// can't be unmapped for that without losing every g-mapping, so each sequence
+// replays the keys to the page while Surfingkeys briefly lets keys through.
 if (/^https?:\/\/github\.com\//.test(window.location.href)) {
-  api.mapkey("gi", "GitHub: gi (go to Issues)", function () {
-    api.Normal.passThrough(100);
-    for (const key of "gi") {
-      document.body.dispatchEvent(new KeyboardEvent("keydown", { key, bubbles: true }));
-    }
-  });
+  const githubGoTo = {
+    gc: "Code",
+    gi: "Issues",
+    gp: "Pull requests",
+    ga: "Actions",
+    gw: "Wiki",
+  };
+  for (const [keys, target] of Object.entries(githubGoTo)) {
+    api.mapkey(keys, `GitHub: ${keys} (go to ${target})`, function () {
+      api.Normal.passThrough(100);
+      for (const key of keys) {
+        document.body.dispatchEvent(new KeyboardEvent("keydown", { key, bubbles: true }));
+      }
+    });
+  }
 }
 
 // ---------------------------------------------------------------------------
