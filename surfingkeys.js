@@ -8,76 +8,83 @@
 // ---------------------------------------------------------------------------
 // Surfingkeys already ships g (google), d (duckduckgo) and y (youtube) with
 // suggestions, so those are kept. Baidu and Bing are removed; `w` becomes Wikipedia.
-api.removeSearchAlias('b');
-api.removeSearchAlias('w');
+api.removeSearchAlias("b");
+api.removeSearchAlias("w");
 
-api.addSearchAlias('w', 'wikipedia', 'https://www.wikipedia.org/w/index.php?title=Special:Search&search=', 's',
-  'https://en.wikipedia.org/w/api.php?action=opensearch&format=json&formatversion=2&namespace=0&limit=40&search=',
-  function(response) {
+api.addSearchAlias(
+  "w",
+  "wikipedia",
+  "https://www.wikipedia.org/w/index.php?title=Special:Search&search=",
+  "s",
+  "https://en.wikipedia.org/w/api.php?action=opensearch&format=json&formatversion=2&namespace=0&limit=40&search=",
+  function (response) {
     return JSON.parse(response.text)[1];
-  });
-api.addSearchAlias('l', "I'm feeling lucky", 'https://www.google.com/search?q={0}&btnI');
-api.addSearchAlias('m', 'google maps', 'https://www.google.com/maps?q=');
-api.addSearchAlias('ty', 'tyda', 'http://tyda.se/search/{0}?');
-api.addSearchAlias('sy', 'synonymer', 'http://synonymer.cc/search?w={0}&w_lang=ALL');
-api.addSearchAlias('wol', 'wolframalpha', 'http://www.wolframalpha.com/input/?i=');
-api.addSearchAlias('bl', 'blocket', 'http://www.blocket.se/stockholm?q={0}&cg=0&w=3&st=s&ca=11&is=1&l=0&md=th');
-api.addSearchAlias('tr', 'tradera', 'http://www.tradera.com/finding.mvc/itemlisting?header=true&search=');
-api.addSearchAlias('yr', 'yr', 'https://www.yr.no/soek/soek.aspx?sted=');
-api.addSearchAlias('pr', 'prisjakt', 'https://www.prisjakt.nu/search.php?s={0}&r=1&e=utf8&ref=155');
-api.addSearchAlias('net', 'netflix', 'https://www.netflix.com/search?q=');
-api.addSearchAlias('im', 'google images', 'https://www.google.com/search?tbm=isch&q=');
+  },
+);
+api.addSearchAlias("l", "I'm feeling lucky", "https://www.google.com/search?q={0}&btnI");
+api.addSearchAlias("m", "google maps", "https://www.google.com/maps?q=");
+api.addSearchAlias("ty", "tyda", "http://tyda.se/search/{0}?");
+api.addSearchAlias("sy", "synonymer", "http://synonymer.cc/search?w={0}&w_lang=ALL");
+api.addSearchAlias("wol", "wolframalpha", "http://www.wolframalpha.com/input/?i=");
+api.addSearchAlias("bl", "blocket", "http://www.blocket.se/stockholm?q={0}&cg=0&w=3&st=s&ca=11&is=1&l=0&md=th");
+api.addSearchAlias("tr", "tradera", "http://www.tradera.com/finding.mvc/itemlisting?header=true&search=");
+api.addSearchAlias("yr", "yr", "https://www.yr.no/soek/soek.aspx?sted=");
+api.addSearchAlias("pr", "prisjakt", "https://www.prisjakt.nu/search.php?s={0}&r=1&e=utf8&ref=155");
+api.addSearchAlias("net", "netflix", "https://www.netflix.com/search?q=");
+api.addSearchAlias("im", "google images", "https://www.google.com/search?tbm=isch&q=");
 
 // The `m` alias above takes over Surfingkeys' `om`, so give it back to the marks list.
-api.mapkey('om', '#8Open URL from vim-like marks', function() {
-  api.Front.openOmnibar({ type: 'VIMarks' });
+api.mapkey("om", "#8Open URL from vim-like marks", function () {
+  api.Front.openOmnibar({ type: "VIMarks" });
 });
 
 // ---------------------------------------------------------------------------
 // Vimium default keys that differ in Surfingkeys
 // ---------------------------------------------------------------------------
 // Surfingkeys defaults that these keys replace are moved to a new key first.
-api.map('J', 'E'); // previous tab
-api.map('K', 'R'); // next tab
-api.map('<Alt-h>', 'H'); // Surfingkeys' H: list of pages this tab has visited
-api.map('H', 'S'); // back in history
-api.map('gF', 'L'); // Surfingkeys' L: regional hints
-api.map('L', 'D'); // forward in history
-api.map('D', 'P'); // Surfingkeys' P: scroll full page down, pairs with U
-api.map('oo', 't'); // omnibar, open in new tab (go: current tab)
-api.map('yf', 'ya'); // copy a link URL
-api.map('P', 'cc'); // open URL from clipboard in new tab
-api.map('^', '<Ctrl-6>'); // last used tab
-api.map('<Alt-f>', 'cf'); // open multiple links in new tabs
+api.map("J", "E"); // previous tab
+api.map("K", "R"); // next tab
+api.map("<Alt-h>", "H"); // Surfingkeys' H: list of pages this tab has visited
+api.map("H", "S"); // back in history
+api.map("gF", "L"); // Surfingkeys' L: regional hints
+api.map("L", "D"); // forward in history
+api.map("D", "P"); // Surfingkeys' P: scroll full page down, pairs with U
+api.map("oo", "t"); // omnibar, open in new tab (go: current tab)
+api.map("yf", "ya"); // copy a link URL
+api.map("P", "cc"); // open URL from clipboard in new tab
+api.map("^", "<Ctrl-6>"); // last used tab
+api.map("<Alt-f>", "cf"); // open multiple links in new tabs
 
 // ---------------------------------------------------------------------------
 // Vimium "keyMappings"
 // ---------------------------------------------------------------------------
-api.map('<', '<<'); // moveTabLeft
-api.map('>', '>>'); // moveTabRight
-api.map('§', '<Ctrl-6>'); // visitPreviousTab
-api.map('`', '<Ctrl-6>'); // visitPreviousTab
-api.map('i', 'gi'); // focusInput
-api.map('gi', '<Alt-i>'); // enterInsertMode (PassThrough mode, <Esc> to leave)
+api.map("<", "<<"); // moveTabLeft
+api.map(">", ">>"); // moveTabRight
+api.map("§", "<Ctrl-6>"); // visitPreviousTab
+api.map("`", "<Ctrl-6>"); // visitPreviousTab
+api.map("i", "gi"); // focusInput
+api.map("gi", "<Alt-i>"); // enterInsertMode (PassThrough mode, <Esc> to leave)
 // map <a-h> goPrevious -- <Alt-h> lists this tab's history instead (above), [ still works
-api.map('<Alt-l>', ']]'); // goNext
-api.map('[', '[['); // previous page link
-api.map(']', ']]'); // next page link
-api.map('gV', ';e'); // open settings
-api.mapkey('R', '#4Reload the page without cache', function() {
-  api.RUNTIME('reloadTab', { nocache: true });
+api.map("<Alt-l>", "]]"); // goNext
+api.map("[", "[["); // previous page link
+api.map("]", "]]"); // next page link
+api.map("gV", ";e"); // open settings
+api.mapkey("R", "#4Reload the page without cache", function () {
+  api.RUNTIME("reloadTab", { nocache: true });
 });
 // map ' Marks.activateGotoMode -- already the default in Surfingkeys
 // map F LinkHints.activateModeToOpenInNewForegroundTab -- use af, F keeps Surfingkeys' tab history forward
-api.map('gH', 'gh'); // Surfingkeys' gh: Chrome history
-api.map('gh', '<Ctrl-h>'); // hover link
-api.map('<Backspace>', 'S'); // goBack
+api.map("gH", "gh"); // Surfingkeys' gh: Chrome history
+api.map("gh", "<Ctrl-h>"); // hover link
+api.map("<Backspace>", "S"); // goBack
 
 // ---------------------------------------------------------------------------
 // Link hints
 // ---------------------------------------------------------------------------
 api.Hints.setCharacters("asdfwezxcjkl;'hmuio,./");
-api.Hints.style('border: 1px solid #282c34; color: white; background: none; background-color: #282c34; font-weight: bold; font-size: 12px;');
+api.Hints.style(
+  "border: 1px solid #282c34; color: white; background: none; background-color: #282c34; font-weight: bold; font-size: 12px;",
+);
 
 // Vimium "nextPatterns" / "previousPatterns"
 settings.nextLinkRegex = /\b(next|more|older|nästa|framåt)\b|forward>|[›→»≫]|>>/i;
@@ -87,54 +94,57 @@ settings.prevLinkRegex = /\b(previous page|prev|previous|newer|back|föregående
 // Exclusion rules
 // ---------------------------------------------------------------------------
 // Rules with empty passKeys: disable Surfingkeys completely.
-settings.blocklistPattern = new RegExp([
-  String.raw`^https://codeshare\.io/`, // Vimium passed every printable key here
-  String.raw`^https://wasavi\.appsweets\.net/`,
-  String.raw`^https://repl\.it/`,
-  String.raw`^https://www\.overleaf\.com/project/`,
-  String.raw`^https://docs\.google\.com/spreadsheets`,
-  String.raw`^https://krunker\.io/`,
-  String.raw`^https?://cpp\.sh/`,
-  String.raw`^https?://flat\.io/`,
-  String.raw`^https?://coolwanglu\.github\.io/`,
-  String.raw`^https?://www\.evernote\.com/`,
-  String.raw`^https?://www\.ratatype\.com/`,
-  String.raw`^https?://foony\.com/`,
-  String.raw`^https?://typst\.app/project/`,
-  String.raw`^https?://vim-adventures\.com/`,
-  String.raw`^https?://keyboardyoga\.space/`,
-  String.raw`^https?://www\.typelit\.io/`,
-  String.raw`^https?://www\.boot\.dev/assignments/`,
-  String.raw`^https?://www\.qwerty\.expert/`,
-  String.raw`^https?://www\.keybr\.com/`,
-  String.raw`^https?://monkeytype\.com/`,
-  String.raw`^https?://typ\.ing/`,
-  String.raw`^https?://www\.iq-eq\.io/`,
-  String.raw`^https?://adventure\.charachorder\.io/`,
-  String.raw`^https?://calendar\.proton\.me/`,
-  String.raw`^https?://hl2\.slqnt\.dev/`,
-].join('|'), 'i');
+settings.blocklistPattern = new RegExp(
+  [
+    String.raw`^https://codeshare\.io/`, // Vimium passed every printable key here
+    String.raw`^https://wasavi\.appsweets\.net/`,
+    String.raw`^https://repl\.it/`,
+    String.raw`^https://www\.overleaf\.com/project/`,
+    String.raw`^https://docs\.google\.com/spreadsheets`,
+    String.raw`^https://krunker\.io/`,
+    String.raw`^https?://cpp\.sh/`,
+    String.raw`^https?://flat\.io/`,
+    String.raw`^https?://coolwanglu\.github\.io/`,
+    String.raw`^https?://www\.evernote\.com/`,
+    String.raw`^https?://www\.ratatype\.com/`,
+    String.raw`^https?://foony\.com/`,
+    String.raw`^https?://typst\.app/project/`,
+    String.raw`^https?://vim-adventures\.com/`,
+    String.raw`^https?://keyboardyoga\.space/`,
+    String.raw`^https?://www\.typelit\.io/`,
+    String.raw`^https?://www\.boot\.dev/assignments/`,
+    String.raw`^https?://www\.qwerty\.expert/`,
+    String.raw`^https?://www\.keybr\.com/`,
+    String.raw`^https?://monkeytype\.com/`,
+    String.raw`^https?://typ\.ing/`,
+    String.raw`^https?://www\.iq-eq\.io/`,
+    String.raw`^https?://adventure\.charachorder\.io/`,
+    String.raw`^https?://calendar\.proton\.me/`,
+    String.raw`^https?://hl2\.slqnt\.dev/`,
+  ].join("|"),
+  "i",
+);
 
 // Rules with passKeys: unmap those keys so they reach the page. Unmapping a
 // prefix like `g` also removes every mapping starting with it (gg, gi, ...).
 const passKeys = [
-  [/^https?:\/\/mail\.google\.com\//, 'gl*u?/xirjkRUoFnp'],
-  [/^https?:\/\/calendar\.google\.com\//, 'mjk4dt?/x'],
-  [/^https:\/\/www\.youtube\.com\/watch/, 'jklmfFNP<>'],
-  [/^https:\/\/www\.scalable-learning\.com\/#\/courses\//, 'jlkf'],
-  [/^https:\/\/www\.twitch\.tv\//, 'fm'],
+  [/^https?:\/\/mail\.google\.com\//, "gl*u?/xirjkRUoFnp"],
+  [/^https?:\/\/calendar\.google\.com\//, "mjk4dt?/x"],
+  [/^https:\/\/www\.youtube\.com\/watch/, "jklmfFNP<>"],
+  [/^https:\/\/www\.scalable-learning\.com\/#\/courses\//, "jlkf"],
+  [/^https:\/\/www\.twitch\.tv\//, "fm"],
   [/^https?:\/\/duckduckgo\.com\//, "jkolv'/hm"],
-  [/^https?:\/\/outlook\.office\.com\//, 'gl*u?/xirjkRUoFnpI'],
-  [/^https?:\/\/thermia\.atlassian\.net\//, '1234[/'],
-  [/^https?:\/\/portal\.azure\.com\//, 'g/'],
-  [/^https?:\/\/jbmhw349lqbus9j8tx4wac18nsja9u\.ext-twitch\.tv\//, 'f'],
-  [/^https?:\/\/cloud\.google\.com\//, '*'],
-  [/^https?:\/\/mail\.proton\.me\//, 'jkuUAgirRFx/?Nn'],
-  [/^https?:\/\/www\.svtplay\.se\/video\//, 'F'],
-  [/^https?:\/\/learn\.kodekloud\.com\//, 'f'],
-  [/^https?:\/\/app\.pluralsight\.com\//, 'f'],
-  [/^https?:\/\/gitlab\.com\//, 'np'],
-  [/^https?:\/\/github\.com\//, '/'],
+  [/^https?:\/\/outlook\.office\.com\//, "gl*u?/xirjkRUoFnpI"],
+  [/^https?:\/\/thermia\.atlassian\.net\//, "1234[/"],
+  [/^https?:\/\/portal\.azure\.com\//, "g/"],
+  [/^https?:\/\/jbmhw349lqbus9j8tx4wac18nsja9u\.ext-twitch\.tv\//, "f"],
+  [/^https?:\/\/cloud\.google\.com\//, "*"],
+  [/^https?:\/\/mail\.proton\.me\//, "jkuUAgirRFx/?Nn"],
+  [/^https?:\/\/www\.svtplay\.se\/video\//, "F"],
+  [/^https?:\/\/learn\.kodekloud\.com\//, "f"],
+  [/^https?:\/\/app\.pluralsight\.com\//, "f"],
+  [/^https?:\/\/gitlab\.com\//, "np"],
+  [/^https?:\/\/github\.com\//, "/"],
 ];
 for (const [pattern, keys] of passKeys) {
   // The URL is checked here rather than passing `pattern` as unmap's domain
@@ -145,7 +155,7 @@ for (const [pattern, keys] of passKeys) {
   for (const key of keys) {
     api.unmap(key);
     // Digits are repeat counts, not mappings, so they can't be unmapped.
-    if (key >= '0' && key <= '9') {
+    if (key >= "0" && key <= "9") {
       settings.digitForRepeat = false;
     }
   }
@@ -155,10 +165,10 @@ for (const [pattern, keys] of passKeys) {
 // can't be unmapped for that without losing every g-mapping, so `gi` replays
 // the keys to the page while Surfingkeys briefly lets keys through.
 if (/^https?:\/\/github\.com\//.test(window.location.href)) {
-  api.mapkey('gi', 'GitHub: gi (go to Issues)', function() {
+  api.mapkey("gi", "GitHub: gi (go to Issues)", function () {
     api.Normal.passThrough(100);
-    for (const key of 'gi') {
-      document.body.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true }));
+    for (const key of "gi") {
+      document.body.dispatchEvent(new KeyboardEvent("keydown", { key, bubbles: true }));
     }
   });
 }
