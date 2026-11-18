@@ -44,8 +44,7 @@ api.map("<", "<<"); // moveTabLeft
 api.map(">", ">>"); // moveTabRight
 api.map("§", "<Ctrl-6>"); // visitPreviousTab
 api.map("`", "<Ctrl-6>"); // visitPreviousTab
-api.map("i", "gi"); // focusInput
-api.map("gi", "<Alt-i>"); // enterInsertMode (PassThrough mode, <Esc> to leave)
+// api.map("i", "gi"); // focusInput
 // map <a-h> goPrevious -- <Alt-h> lists this tab's history instead (above), [ still works
 api.map("<Alt-l>", "]]"); // goNext
 api.map("[", "[["); // previous page link
@@ -77,54 +76,58 @@ settings.prevLinkRegex = /\b(previous page|prev|previous|newer|back|föregående
 // ---------------------------------------------------------------------------
 // Rules with empty passKeys: disable Surfingkeys completely.
 const blocklist = [
+  // keep-sorted start
   String.raw`^https://codeshare\.io/`, // Vimium passed every printable key here
-  String.raw`^https://wasavi\.appsweets\.net/`,
-  String.raw`^https://repl\.it/`,
-  String.raw`^https://www\.overleaf\.com/project/`,
   String.raw`^https://docs\.google\.com/spreadsheets`,
   String.raw`^https://krunker\.io/`,
-  String.raw`^https?://cpp\.sh/`,
-  String.raw`^https?://flat\.io/`,
-  String.raw`^https?://coolwanglu\.github\.io/`,
-  String.raw`^https?://www\.evernote\.com/`,
-  String.raw`^https?://www\.ratatype\.com/`,
-  String.raw`^https?://foony\.com/`,
-  String.raw`^https?://typst\.app/project/`,
-  String.raw`^https?://vim-adventures\.com/`,
-  String.raw`^https?://keyboardyoga\.space/`,
-  String.raw`^https?://www\.typelit\.io/`,
-  String.raw`^https?://www\.boot\.dev/assignments/`,
-  String.raw`^https?://www\.qwerty\.expert/`,
-  String.raw`^https?://www\.keybr\.com/`,
-  String.raw`^https?://monkeytype\.com/`,
-  String.raw`^https?://typ\.ing/`,
-  String.raw`^https?://www\.iq-eq\.io/`,
+  String.raw`^https://repl\.it/`,
+  String.raw`^https://wasavi\.appsweets\.net/`,
+  String.raw`^https://www\.overleaf\.com/project/`,
   String.raw`^https?://adventure\.charachorder\.io/`,
   String.raw`^https?://calendar\.proton\.me/`,
+  String.raw`^https?://coolwanglu\.github\.io/`,
+  String.raw`^https?://cpp\.sh/`,
+  String.raw`^https?://flat\.io/`,
+  String.raw`^https?://foony\.com/`,
   String.raw`^https?://hl2\.slqnt\.dev/`,
+  String.raw`^https?://keyboardyoga\.space/`,
+  String.raw`^https?://monkeytype\.com/`,
+  String.raw`^https?://typ\.ing/`,
+  String.raw`^https?://typst\.app/project/`,
+  String.raw`^https?://vim-adventures\.com/`,
+  String.raw`^https?://www\.boot\.dev/assignments/`,
+  String.raw`^https?://www\.evernote\.com/`,
+  String.raw`^https?://www\.iq-eq\.io/`,
+  String.raw`^https?://www\.keybr\.com/`,
+  String.raw`^https?://www\.qwerty\.expert/`,
+  String.raw`^https?://www\.ratatype\.com/`,
+  String.raw`^https?://www\.typelit\.io/`,
+  // keep-sorted end
 ];
 settings.blocklistPattern = new RegExp(blocklist.join("|"), "i");
 
 // Rules with passKeys: unmap those keys so they reach the page. Unmapping a
 // prefix like `g` also removes every mapping starting with it (gg, gi, ...).
 const passKeys = [
-  [/^https?:\/\/mail\.google\.com\//, "gl*u?/xirjkRUoFnp"],
-  [/^https?:\/\/calendar\.google\.com\//, "mjk4dt?/x"],
-  [/^https:\/\/www\.youtube\.com\/watch/, "jklmfFNP<>"],
+  // keep-sorted start
   [/^https:\/\/www\.scalable-learning\.com\/#\/courses\//, "jlkf"],
   [/^https:\/\/www\.twitch\.tv\//, "fm"],
-  [/^https?:\/\/duckduckgo\.com\//, "jkolv'/hm"],
-  [/^https?:\/\/outlook\.office\.com\//, "gl*u?/xirjkRUoFnpI"],
-  [/^https?:\/\/thermia\.atlassian\.net\//, "1234[/"],
-  [/^https?:\/\/portal\.azure\.com\//, "g/"],
-  [/^https?:\/\/jbmhw349lqbus9j8tx4wac18nsja9u\.ext-twitch\.tv\//, "f"],
-  [/^https?:\/\/cloud\.google\.com\//, "*"],
-  [/^https?:\/\/mail\.proton\.me\//, "jkuUAgirRFx/?Nn"],
-  [/^https?:\/\/www\.svtplay\.se\/video\//, "F"],
-  [/^https?:\/\/learn\.kodekloud\.com\//, "f"],
+  [/^https:\/\/www\.youtube\.com\/watch/, "jklmfFNP<>"],
   [/^https?:\/\/app\.pluralsight\.com\//, "f"],
-  [/^https?:\/\/gitlab\.com\//, "np"],
+  [/^https?:\/\/calendar\.google\.com\//, "mjk4dt?/x"],
+  [/^https?:\/\/cloud\.google\.com\//, "*"],
+  [/^https?:\/\/duckduckgo\.com\//, "jkolv'/hm"],
   [/^https?:\/\/github\.com\//, "/"],
+  [/^https?:\/\/gitlab\.com\//, "np"],
+  [/^https?:\/\/jbmhw349lqbus9j8tx4wac18nsja9u\.ext-twitch\.tv\//, "f"],
+  [/^https?:\/\/learn\.kodekloud\.com\//, "f"],
+  [/^https?:\/\/mail\.google\.com\//, "gl*u?/xirjkRUoFnp"],
+  [/^https?:\/\/mail\.proton\.me\//, "jkuUAgirRFx/?Nn"],
+  [/^https?:\/\/outlook\.office\.com\//, "gl*u?/xirjkRUoFnpI"],
+  [/^https?:\/\/portal\.azure\.com\//, "g/"],
+  [/^https?:\/\/thermia\.atlassian\.net\//, "1234[/"],
+  [/^https?:\/\/www\.svtplay\.se\/video\//, "F"],
+  // keep-sorted end
 ];
 for (const [pattern, keys] of passKeys) {
   // The URL is checked here rather than passing `pattern` as unmap's domain
