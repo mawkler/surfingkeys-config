@@ -20,54 +20,58 @@ api.mapkey("om", "#8Open URL from vim-like marks", function () {
   api.Front.openOmnibar({ type: "VIMarks" });
 });
 
+api.unmap("<Ctrl-6>");
+api.unmap("<Ctrl-h>");
+
 // ---------------------------------------------------------------------------
-// Vimium default keys that differ in Surfingkeys
+// Keymaps
 // ---------------------------------------------------------------------------
-// Surfingkeys defaults that these keys replace are moved to a new key first.
 api.map("J", "E"); // previous tab
 api.map("K", "R"); // next tab
-api.map("<Alt-h>", "H"); // Surfingkeys' H: list of pages this tab has visited
-api.map("H", "S"); // back in history
-api.map("gF", "L"); // Surfingkeys' L: regional hints
+api.map("<Alt-h>", "H"); // list of tab's visited pages
 api.map("L", "D"); // forward in history
-api.map("D", "P"); // Surfingkeys' P: scroll full page down, pairs with U
+api.map("H", "S"); // back in history
+api.map("<Backspace>", "S"); // back in history
+api.map("gF", "L"); // regional hints
+api.map("D", "P"); //  scroll full page down, pairs with U
 api.map("oo", "t"); // omnibar, open in new tab (go: current tab)
 api.map("yf", "ya"); // copy a link URL
 api.map("P", "cc"); // open URL from clipboard in new tab
-api.map("^", "<Ctrl-6>"); // last used tab
 api.map("<Alt-f>", "cf"); // open multiple links in new tabs
-
-// ---------------------------------------------------------------------------
-// Vimium "keyMappings"
-// ---------------------------------------------------------------------------
-api.map("<", "<<"); // moveTabLeft
-api.map(">", ">>"); // moveTabRight
-api.map("§", "<Ctrl-6>"); // visitPreviousTab
-api.map("`", "<Ctrl-6>"); // visitPreviousTab
-// api.map("i", "gi"); // focusInput
-// map <a-h> goPrevious -- <Alt-h> lists this tab's history instead (above), [ still works
-api.map("<Alt-l>", "]]"); // goNext
+api.map("<", "<<"); // move tab left
+api.map(">", ">>"); // move tab right
+api.map("`", "<Ctrl-6>"); // switch to previous tab
 api.map("[", "[["); // previous page link
 api.map("]", "]]"); // next page link
-api.map("gV", ";e"); // open settings
+api.map("gH", "gh"); // chromium history
+api.map("gh", "<Ctrl-h>"); // hover link
+
+api.mapkey("g<", "#3Move current tab to the far left", () => api.RUNTIME("moveTab", { step: -100 }));
+api.mapkey("g>", "#3Move current tab to the far right", () => api.RUNTIME("moveTab", { step: 100 }));
 api.mapkey("R", "#4Reload the page without cache", function () {
   api.RUNTIME("reloadTab", { nocache: true });
 });
-// map ' Marks.activateGotoMode -- already the default in Surfingkeys
-// map F LinkHints.activateModeToOpenInNewForegroundTab -- use af, F keeps Surfingkeys' tab history forward
-api.map("gH", "gh"); // Surfingkeys' gh: Chrome history
-api.map("gh", "<Ctrl-h>"); // hover link
-api.map("<Backspace>", "S"); // goBack
+
+// Swap `i` and `gi` (using `F13` as an intermediate mapping)
+api.map("<F13>", "i");
+api.map("i", "gi");
+api.map("gi", "<F13>");
+api.unmap("<F13>");
 
 // ---------------------------------------------------------------------------
 // Link hints
 // ---------------------------------------------------------------------------
 api.Hints.setCharacters("asdfwezxcjkl;'hmuio,./");
-api.Hints.style(
-  "border: 1px solid #282c34; color: white; background: none; background-color: #282c34; font-weight: bold; font-size: 12px;",
-);
+api.Hints.style(`
+  border: 1px solid #282c34;
+  color: white;
+  background: none;
+  background-color: #282c34;
+  font-weight: bold;
+  font-size: 12px;
+`);
 
-// Vimium "nextPatterns" / "previousPatterns"
+// Pattern to match "next"/"previous" links
 settings.nextLinkRegex = /\b(next|more|older|nästa|framåt)\b|forward>|[›→»≫]|>>/i;
 settings.prevLinkRegex = /\b(previous page|prev|previous|newer|back|föregående|bakåt)\b|[<‹←«≪]/i;
 
@@ -106,8 +110,7 @@ const blocklist = [
 ];
 settings.blocklistPattern = new RegExp(blocklist.join("|"), "i");
 
-// Rules with passKeys: unmap those keys so they reach the page. Unmapping a
-// prefix like `g` also removes every mapping starting with it (gg, gi, ...).
+// Rules with passKeys: unmap those keys so they reach the page
 const passKeys = [
   // keep-sorted start
   [/^https:\/\/www\.scalable-learning\.com\/#\/courses\//, "jlkf"],
