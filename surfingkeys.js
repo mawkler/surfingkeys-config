@@ -67,6 +67,7 @@ api.Hints.style(`
   color: white;
   background: none;
   background-color: #282c34;
+  font-family: "Fira Code", monospace;
   font-weight: bold;
   font-size: 12px;
 `);
