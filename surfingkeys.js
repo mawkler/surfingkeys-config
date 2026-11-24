@@ -58,6 +58,11 @@ api.map("i", "gi");
 api.map("gi", "<F13>");
 api.unmap("<F13>");
 
+// Remove the Emacs-like insert mode keys so text boxes keep the browser's behaviour
+for (const key of ["<Ctrl-a>", "<Ctrl-e>", "<Ctrl-u>", "<Alt-b>", "<Alt-f>", "<Alt-w>", "<Alt-d>"]) {
+  api.iunmap(key);
+}
+
 // ---------------------------------------------------------------------------
 // Link hints
 // ---------------------------------------------------------------------------
